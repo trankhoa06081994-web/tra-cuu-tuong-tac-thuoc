@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trợ lý AI Tra Cứu Tương Tác Thuốc</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 800px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .header h1 {
+      color: #1a73e8;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .header p {
+      color: #5f6368;
+      font-size: 14px;
+      margin: 0;
+    }
+  </style>
+
+  <!-- Thư viện Vertex AI Builder -->
+  <script src="https://cloud.google.com/ai-builder/web/widget.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>AI TRA CỨU TƯƠNG TÁC THUỐC</h1>
+      <p>Bệnh viện Đa khoa Khu vực Long Châu</p>
+    </div>
+
+    <!-- Khai báo Widget chuẩn -->
+    <gen-search-widget
+      config-id="2f25250b-1cd6-4f27-8be4-d41d9d5cbee5"
+      placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)...">
+    </gen-search-widget>
+  </div>
+
+</body>
+</html>
