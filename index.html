@@ -17,11 +17,12 @@
     }
     .container {
       width: 100%;
-      max-width: 800px;
+      max-width: 850px;
       background: #ffffff;
       padding: 30px;
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      min-height: 400px;
     }
     .header {
       text-align: center;
@@ -37,16 +38,10 @@
       font-size: 14px;
       margin: 0;
     }
-    /* Kiểu dáng ô tìm kiếm */
-    gen-search-widget {
-      width: 100%;
-      display: block;
-      margin-top: 15px;
-    }
   </style>
 
-  <!-- Thư viện Vertex AI Builder chính thức -->
-  <script src="https://cloud.google.com/ai-builder/web/widget.js"></script>
+  <!-- Thư viện Widget Vertex AI Builder -->
+  <script src="https://cloud.google.com/ai-builder/web/widget.js" defer></script>
 </head>
 <body>
 
@@ -56,11 +51,13 @@
       <p>Bệnh viện Đa khoa Khu vực Long Châu</p>
     </div>
 
-    <!-- Thẻ Widget chính thức -->
+    <!-- Khai báo Widget chuẩn -->
     <gen-search-widget
       config-id="2f25250b-1cd6-4f27-8be4-d41d9d5cbee5"
-      placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)...">
+      trigger-element-id="searchWidgetTrigger">
     </gen-search-widget>
+
+    <input type="text" id="searchWidgetTrigger" placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)..." style="width:100%; padding:14px; border:1px solid #dadce0; border-radius:8px; font-size:16px; outline:none;">
   </div>
 
 </body>
