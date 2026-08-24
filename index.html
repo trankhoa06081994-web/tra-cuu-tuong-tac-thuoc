@@ -38,13 +38,35 @@
       font-size: 14px;
       margin: 0;
     }
-    .search-container {
-      margin-top: 15px;
-      width: 100%;
+    .custom-search {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .custom-search input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+    .custom-search button {
+      padding: 0 24px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .custom-search button:hover {
+      background-color: #1557b0;
     }
   </style>
 
-  <!-- Thư viện Vertex AI Builder chính thức từ Google -->
+  <!-- Thư viện Vertex AI Builder -->
   <script src="https://cloud.google.com/ai-builder/web/widget.js"></script>
 </head>
 <body>
@@ -55,14 +77,32 @@
       <p>Bệnh viện Đa khoa Khu vực Long Châu</p>
     </div>
 
-    <!-- Khung tìm kiếm tích hợp sẵn của Google Vertex AI -->
-    <div class="search-container">
-      <gen-search-widget
-        config-id="2f25250b-1cd6-4f27-8be4-d41d9d5cbee5"
-        placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)...">
-      </gen-search-widget>
+    <!-- Ô tìm kiếm giao diện thủ công -->
+    <div class="custom-search">
+      <input type="text" id="searchInput" placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)...">
+      <button id="searchBtn" type="button">Tra cứu</button>
     </div>
+
+    <!-- Widget ẩn để hứng lệnh tìm kiếm -->
+    <gen-search-widget
+      id="vertexWidget"
+      config-id="2f25250b-1cd6-4f27-8be4-d41d9d5cbee5"
+      trigger-element-id="searchBtn">
+    </gen-search-widget>
   </div>
+
+  <script>
+    const inputEl = document.getElementById('searchInput');
+    const btnEl = document.getElementById('searchBtn');
+
+    // Bắt sự kiện Enter trên ô input để kích hoạt nút Tra cứu
+    inputEl.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        btnEl.click();
+      }
+    });
+  </script>
 
 </body>
 </html>
