@@ -38,6 +38,38 @@
       font-size: 14px;
       margin: 0;
     }
+    .search-box-wrapper {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .search-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+    }
+    .search-btn {
+      padding: 0 24px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .search-btn:hover {
+      background-color: #1557b0;
+    }
   </style>
 
   <!-- Thư viện Widget Vertex AI Builder -->
@@ -51,14 +83,45 @@
       <p>Bệnh viện Đa khoa Khu vực Long Châu</p>
     </div>
 
-    <!-- Khai báo Widget chuẩn -->
+    <!-- Khai báo Widget AI -->
     <gen-search-widget
-      config-id="2f25250b-1cd6-4f27-8be4-d41d9d5cbee5"
-      trigger-element-id="searchWidgetTrigger">
+      id="myWidget"
+      config-id="2f25250b-1cd6-4f27-8be4-d41d9d5cbee5">
     </gen-search-widget>
 
-    <input type="text" id="searchWidgetTrigger" placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)..." style="width:100%; padding:14px; border:1px solid #dadce0; border-radius:8px; font-size:16px; outline:none;">
+    <!-- Khung tìm kiếm có nút bấm và bắt sự kiện Enter -->
+    <div class="search-box-wrapper">
+      <input 
+        type="text" 
+        id="searchQuery" 
+        class="search-input" 
+        placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)...">
+      <button id="searchBtn" class="search-btn">Tra cứu</button>
+    </div>
   </div>
+
+  <script>
+    function executeSearch() {
+      const input = document.getElementById('searchQuery');
+      const widget = document.getElementById('myWidget');
+      const query = input.value.trim();
+      
+      if (query && widget) {
+        // Gửi truy vấn trực tiếp vào Widget AI của Google
+        widget.search(query);
+      }
+    }
+
+    // Sự kiện khi bấm Enter
+    document.getElementById('searchQuery').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        executeSearch();
+      }
+    });
+
+    // Sự kiện khi bấm nút Tra cứu
+    document.getElementById('searchBtn').addEventListener('click', executeSearch);
+  </script>
 
 </body>
 </html>
