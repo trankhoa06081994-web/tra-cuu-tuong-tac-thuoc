@@ -19,10 +19,12 @@
       width: 100%;
       max-width: 850px;
       background: #ffffff;
-      padding: 30px;
+      padding: 40px 30px;
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .header {
       text-align: center;
@@ -30,34 +32,21 @@
     }
     .header h1 {
       color: #1a73e8;
-      font-size: 22px;
-      margin-bottom: 6px;
+      font-size: 24px;
+      margin-bottom: 8px;
     }
     .header p {
       color: #5f6368;
-      font-size: 14px;
+      font-size: 15px;
       margin: 0;
     }
-    .search-box-wrapper {
+    .action-wrapper {
+      margin-top: 15px;
       display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .search-input {
-      flex: 1;
-      padding: 14px 18px;
-      border: 1px solid #dadce0;
-      border-radius: 8px;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .search-input:focus {
-      border-color: #1a73e8;
-      box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+      justify-content: center;
     }
     .search-btn {
-      padding: 0 24px;
+      padding: 14px 32px;
       background-color: #1a73e8;
       color: white;
       border: none;
@@ -65,14 +54,18 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.2s;
+      box-shadow: 0 2px 6px rgba(26,115,232,0.3);
+      transition: background-color 0.2s, transform 0.1s;
     }
     .search-btn:hover {
       background-color: #1557b0;
     }
+    .search-btn:active {
+      transform: scale(0.98);
+    }
   </style>
 
-  <!-- 1. Widget JavaScript bundle chính thức từ Google -->
+  <!-- Widget JavaScript bundle từ Google -->
   <script src="https://cloud.google.com/ai/gen-app-builder/client?hl=en_US"></script>
 </head>
 <body>
@@ -83,52 +76,18 @@
       <p>Bệnh viện Đa khoa Khu vực Long Châu</p>
     </div>
 
-    <!-- Khung nhập từ khóa & Nút Tra cứu -->
-    <div class="search-box-wrapper">
-      <input 
-        type="text" 
-        id="searchInput" 
-        class="search-input" 
-        placeholder="Nhập tên thuốc tra cứu (Ví dụ: Acid tranexamic và Ethinylestradiol)...">
-      <button id="searchWidgetTrigger" class="search-btn" type="button">Tra cứu</button>
+    <!-- Nút kích hoạt tra cứu -->
+    <div class="action-wrapper">
+      <button id="searchWidgetTrigger" class="search-btn" type="button">Tra cứu tương tác thuốc</button>
     </div>
 
-    <!-- 2. Search widget element kết nối với Google Vertex AI -->
+    <!-- Search widget element từ Google Vertex AI -->
     <gen-search-widget
       id="vertexWidget"
       configId="2f25250b-1cd6-4f27-8be4-d41d9d5cbee5"
       triggerId="searchWidgetTrigger">
     </gen-search-widget>
   </div>
-
-  <!-- 3. Đoạn mã xử lý kết nối dữ liệu & phím Enter -->
-  <script>
-    const inputEl = document.getElementById('searchInput');
-    const triggerBtn = document.getElementById('searchWidgetTrigger');
-    const widgetEl = document.getElementById('vertexWidget');
-
-    // Hàm đồng bộ nội dung input sang Widget và kích hoạt mở cửa sổ trả lời
-    function handleSearch() {
-      const query = inputEl.value.trim();
-      if (query) {
-        widgetEl.setAttribute('search-query', query);
-      }
-    }
-
-    // Bắt sự kiện khi nhấn Enter trong ô nhập
-    inputEl.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleSearch();
-        triggerBtn.click(); // Kích hoạt sự kiện click trên nút bấm đã liên kết với triggerId
-      }
-    });
-
-    // Bắt sự kiện khi click trực tiếp vào nút Tra cứu
-    triggerBtn.addEventListener('click', function() {
-      handleSearch();
-    });
-  </script>
 
 </body>
 </html>
